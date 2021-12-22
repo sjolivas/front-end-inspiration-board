@@ -19,6 +19,39 @@ const makeEmptyCardFields = () => {
 };
 
 const SidePanel = () => {
+    //generate drop down menu of created boards
+
+    const [currentBoards, setCurrentBoards] = useState([]);
+
+    useEffect(() => {
+        axios
+            .get(`${process.env.REACT_APP_BACKEND_URL}/boards`)
+            .then((response) => {
+                const boards = response.data[0]
+                setCurrentBoards((prevState) => {
+                    prevState = boards
+                });
+                const boardList = document.getElementById('board-list')
+
+                for (let board of boards) {
+                    let newBoard = document.createElement('option')
+                    newBoard.value = board.board_id
+                    newBoard.id = board.board_id
+                    const boardTitle = document.createTextNode(board.title);
+                    newBoard.appendChild(boardTitle)
+                    boardList.appendChild(newBoard)
+                }
+            })
+            .catch((error) => console.log(error));
+    }, []);
+
+    //saves the current selected board from side panel's id as a piece of state
+    const [selectedBoard, setSelectedBoard] = useState(null);
+
+    const onSelectBoard = (event) => {
+        setSelectedBoard(event.target.value);
+    };
+
     //axios.post for submit buttons for board and card
     const onSubmitBoard = (event) => {
         event.preventDefault();
@@ -29,7 +62,8 @@ const SidePanel = () => {
                 owner: boardFields.owner //find a way to use form field info here
             })
             .then((response) => {
-                // use success response somehow?
+                setBoardFields(makeEmptyBoardFields());
+                console.log(response);
             })
             .catch((error) => console.log(error));
     };
@@ -38,7 +72,7 @@ const SidePanel = () => {
         event.preventDefault();
 
         axios
-            .post(`${process.env.REACT_APP_BACKEND_URL}/boards/${boardId}/cards`, {
+            .post(`${process.env.REACT_APP_BACKEND_URL}/boards/${selectedBoard}/cards`, {
                 message: cardFields.message //find a way to use form field info here
             })
             .then ((response) => {
@@ -84,9 +118,12 @@ const SidePanel = () => {
 
     const onDeleteBoard = () => {
         axios
-        .delete(`${process.env.REACT_APP_BACKEND_URL}/boards/${boardID}`)
-        .then((then) => {
-            // use success response somehow?
+        .delete(`${process.env.REACT_APP_BACKEND_URL}/boards/${selectedBoard}`)
+        .then((response) => {
+            console.log(response);
+            // ask Michelle to include board_id in success response message
+            //const deletedBoard = document.getElementById(board_id);
+            // deletedBoard.remove();
         })
         .catch((error) => console.log(error));
     };
@@ -94,8 +131,7 @@ const SidePanel = () => {
     return (
         <div>
             <h3>Select Board to Display:</h3>
-            <select>
-                <option>{Board.title}</option>
+            <select id='board-list' onChange={onSelectBoard}>
             </select>
             <h3>Create New Board</h3>
             <form className='BoardForm' onSubmit={onSubmitBoard}>
