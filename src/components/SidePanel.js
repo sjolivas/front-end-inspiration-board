@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Board from './Board';
+import './SidePanel.css';
 
 // TO DO
 // create a piece of state associated with currently selected board
@@ -18,7 +19,7 @@ const makeEmptyCardFields = () => {
     };
 };
 
-const SidePanel = () => {
+const SidePanel = (props) => {
     //generate drop down menu of created boards
 
     const [currentBoards, setCurrentBoards] = useState([]);
@@ -45,13 +46,6 @@ const SidePanel = () => {
             .catch((error) => console.log(error));
     }, []);
 
-    //saves the current selected board from side panel's id as a piece of state
-    const [selectedBoard, setSelectedBoard] = useState(null);
-
-    const onSelectBoard = (event) => {
-        setSelectedBoard(event.target.value);
-    };
-
     //axios.post for submit buttons for board and card
     const onSubmitBoard = (event) => {
         event.preventDefault();
@@ -72,11 +66,12 @@ const SidePanel = () => {
         event.preventDefault();
 
         axios
-            .post(`${process.env.REACT_APP_BACKEND_URL}/boards/${selectedBoard}/cards`, {
-                message: cardFields.message //find a way to use form field info here
+            .post(`${process.env.REACT_APP_BACKEND_URL}/boards/${props.selectedBoard}/cards`, {
+                message: cardFields.message
             })
             .then ((response) => {
-                // use success resposne somehow?
+                setCardFields(makeEmptyCardFields());
+                console.log(response);
             })
             .catch((error) => console.log(error));
     };
@@ -116,22 +111,27 @@ const SidePanel = () => {
     // add color changing logic for 4 buttons, only in frontend, for card components being displayed
     //axios.delete for delete selected board button
 
+    // should go in App.js
+    const onSelectColor = (event) => {
+
+    };
+
     const onDeleteBoard = () => {
         axios
-        .delete(`${process.env.REACT_APP_BACKEND_URL}/boards/${selectedBoard}`)
+        .delete(`${process.env.REACT_APP_BACKEND_URL}/boards/${props.selectedBoard}`)
         .then((response) => {
             console.log(response);
             // ask Michelle to include board_id in success response message
-            //const deletedBoard = document.getElementById(board_id);
+            // const deletedBoard = document.getElementById(board_id);
             // deletedBoard.remove();
         })
         .catch((error) => console.log(error));
     };
 
     return (
-        <div>
+        <div className='sidepanel'>
             <h3>Select Board to Display:</h3>
-            <select id='board-list' onChange={onSelectBoard}>
+            <select id='board-list' onChange={props.onSelectBoard}>
             </select>
             <h3>Create New Board</h3>
             <form className='BoardForm' onSubmit={onSubmitBoard}>
@@ -168,10 +168,12 @@ const SidePanel = () => {
                 <input type='submit' value='Submit New Card' onSubmit={(event) => {event.preventDefault();}}/>
             </form>
             <h3>Select Color of Cards:</h3>
-            <button></button>
-            <button></button>
-            <button></button>
-            <button></button>
+            <div id='color-buttons' onClick={onSelectColor}>
+                <button id='1b'>1</button>
+                <button id='2b'>2</button>
+                <button id='3b'>3</button>
+                <button id='4b'>4</button>
+            </div>
             <button onClick={onDeleteBoard}>Delete Selected Board</button>
         </div>
     );
