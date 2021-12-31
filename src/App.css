@@ -1,23 +1,20 @@
 body {
     background-image: url("https://c1.wallpaperflare.com/preview/907/581/284/backdrop-background-blank-board.jpg");
-    display: flex; 
 }
 
-.App-header {
-    background-color: blue;
+.App {
+    display: grid; 
+    grid-template-columns: 19.9% 80.1% 50%; 
+    grid-template-rows: 9.4% 90.6% 50%; 
+    gap: 10px 10px; 
+    grid-template-areas: 
+        "App-header App-header App-header"
+        "sidepanel board board"
+        "sidepanel board board"; 
 }
 
-/* .board {
-    background-color: green;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-gap: 20px
-} */
-
-SidePanel {
-    background-color: pink;
+.App-header { grid-area: App-header; }
+.sidepanel { 
+    grid-area: sidepanel;  
 }
-/* 
-.card {
-    background-color: rgb(241, 236, 85);
-} */
+.board { grid-area: board; }
