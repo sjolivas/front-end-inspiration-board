@@ -79,9 +79,9 @@ const SidePanel = (props) => {
     const lengthValidator = (target) => {
         const length = document.getElementById(target.id).value.length;
         if (length === target.maxLength) {
-            target.style.color = 'red';
+            target.style.backgroundColor = '#de7171';
         } else {
-            target.style.color = 'black';
+            target.style.backgroundColor = 'white';
         }
     };
 
@@ -107,22 +107,14 @@ const SidePanel = (props) => {
         lengthValidator(event.target);
     };
 
-    // add error logic empty/blank/invalid (too long)/missing "title" or "owner" input
-    // add color changing logic for 4 buttons, only in frontend, for card components being displayed
-    //axios.delete for delete selected board button
-
-    // should go in App.js
-    const onSelectColor = (event) => {
-
-    };
-
     const onDeleteBoard = () => {
         axios
         .delete(`${process.env.REACT_APP_BACKEND_URL}/boards/${props.selectedBoard}`)
         .then((response) => {
             console.log(response);
             // ask Michelle to include board_id in success response message
-            // const deletedBoard = document.getElementById(board_id);
+            // const boardId = response.data.board_id
+            // const deletedBoard = document.getElementById(boardId);
             // deletedBoard.remove();
         })
         .catch((error) => console.log(error));
@@ -132,6 +124,7 @@ const SidePanel = (props) => {
         <div className='sidepanel'>
             <h3>Select Board to Display:</h3>
             <select id='board-list' onChange={props.onSelectBoard}>
+                <option disabled selected value> -- Select Board -- </option>
             </select>
             <h3>Create New Board</h3>
             <form className='BoardForm' onSubmit={onSubmitBoard}>
@@ -141,6 +134,7 @@ const SidePanel = (props) => {
                     name='title' 
                     type='text' 
                     maxLength='25' 
+                    placeholder='Board Title' 
                     value ={boardFields.title} 
                     onChange={handleTitleChanged}
                 />
@@ -150,6 +144,7 @@ const SidePanel = (props) => {
                     name='owner'
                     type='text' 
                     maxLength='30' 
+                    placeholder="Owner's Name" 
                     value={boardFields.owner} 
                     onChange={handleOwnerChanged}
                 />
@@ -162,17 +157,18 @@ const SidePanel = (props) => {
                     name='message'
                     type='text' 
                     maxLength='40' 
+                    placeholder='Type your card message here'
                     value={cardFields.message}
                     onChange={handleMessageChanged}
                 />
                 <input type='submit' value='Submit New Card' onSubmit={(event) => {event.preventDefault();}}/>
             </form>
             <h3>Select Color of Cards:</h3>
-            <div id='color-buttons' onClick={onSelectColor}>
-                <button id='1b'>1</button>
-                <button id='2b'>2</button>
-                <button id='3b'>3</button>
-                <button id='4b'>4</button>
+            <div id='color-buttons' onClick={props.onSelectColor}>
+                <button id='yellow'>1</button>
+                <button id='red'>2</button>
+                <button id='green'>3</button>
+                <button id='blue'>4</button>
             </div>
             <button onClick={onDeleteBoard}>Delete Selected Board</button>
         </div>
