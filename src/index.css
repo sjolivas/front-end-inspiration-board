@@ -34,6 +34,8 @@ body {
   display: grid;
   justify-items: center;
   align-items: center;
+	font-size: 25px;
+	margin-bottom: 30px;
 }
 
 .sidepanel { 
@@ -46,7 +48,8 @@ body {
 
 /* SidePanel Container*/
 .sidepanel-main {
-  background-color: #FFCFD2;
+  background: #ffdede;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -69,7 +72,7 @@ body {
 }
 
 .card-main {
-  background-color: #CFBAF0;
+  background-color: #fffcab; ;
   border-radius: 10px;
   padding: 1rem;
   min-height: 170px;
@@ -89,7 +92,7 @@ body {
   grid-area: board-selector; 
   display: flex;
   flex-direction: column;
-  justify-content:space-around;
+  align-items: center;
   padding-bottom: 10px;
   padding-left: 10px;
   padding-right: 10px;
@@ -99,7 +102,7 @@ body {
   grid-area: create-new-board;
   display: flex;
   flex-direction: column;
-  justify-content:space-around;
+  align-items: center;
   padding-bottom: 10px;
   padding-left: 10px;
   padding-right: 10px;
@@ -108,9 +111,19 @@ body {
 
 /* Creating New Card */
 .create-card { 
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
-  justify-content:space-around;
+  align-items: center;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+}
+
+.card-color {
+  display: flex;
+  flex-direction: column;
   padding-bottom: 10px;
   padding-left: 10px;
   padding-right: 10px;
@@ -118,9 +131,14 @@ body {
 }
 
 textarea {
-  background-color: #F3EC46;
+  background-color: #fffcab;
   border: none;
   resize: none;
+  border-radius: 10px;
+  overflow: auto;
+  padding: 1rem;
+  min-height: 150px;
+  width: 170px;
 }
 
 textarea:focus {
@@ -129,6 +147,7 @@ textarea:focus {
 
 /* Select Option Dropdowns */
 .select-style select {
+  border-radius: 3px;
   padding: 5px 8px;
   width: 130%;
   border: none;
@@ -140,30 +159,44 @@ textarea:focus {
 
 /* All Buttons */
 button {
-  background-color: #B9FBC0;
+  /* background-color: #B9FBC0;
+  border-radius: 3px;
+  border: none; */
   border: none;
-  font-weight: bold;
+	outline: none;
+	padding: 5px 10px;
+	border-radius: 50px;
+	color: #333;
+	background: #fff;
+	margin-bottom: 10px;
+	box-shadow: 0 3px 20px 0 #0000003b;
 }
 
 button:hover {
   background-color: #7B2CBF;
   color: white;
   font: Helvetica;
-  font-weight: bold;
 }
 
 /* Submit Board Button (input) */
 .submit-board {
-  background-color: #B9FBC0;
+  /* background-color: #B9FBC0;
+  border-radius: 3px;
+  border: none; */
   border: none;
-  font-weight: bold;
+	outline: none;
+	padding: 5px 10px;
+	border-radius: 50px;
+	color: #333;
+	background: #fff;
+	margin-bottom: 10px;
+	box-shadow: 0 3px 20px 0 #0000003b;
 }
 
 .submit-board:hover {
   background-color: #7B2CBF;
   color: white;
   font: Helvetica;
-  font-weight: bold;
 }
 
 

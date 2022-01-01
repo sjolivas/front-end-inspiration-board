@@ -5,7 +5,6 @@ const CreateBoard = () => {
       <form className="BoardForm">
         {" "}
         {/*onSubmit={onSubmitBoard} */}
-        <label>Board Title:</label>
         <input
           id="board-title-input"
           name="title"
@@ -15,7 +14,8 @@ const CreateBoard = () => {
           // value ={boardFields.title}
           // onChange={handleTitleChanged}
         />
-        <label>Owner's Name:</label>
+      </form>
+      <form>
         <input
           id="owner-name-input"
           name="owner"
@@ -25,12 +25,8 @@ const CreateBoard = () => {
           // value={boardFields.owner}
           // onChange={handleOwnerChanged}
         />
-        <input
-          className="submit-board"
-          type="submit"
-          value="Submit New Board"
-        />
       </form>
+      <input className="submit-board" type="submit" value="Submit New Board" />
     </section>
   );
 };

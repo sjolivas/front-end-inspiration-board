@@ -1,6 +1,6 @@
 const CardColor = (props) => {
   return (
-    <div className="pick-a-color">
+    <div className="card-color">
       <label>Pick a Card Color:</label>
       <select id="color-buttons" onChange={props.onSelectColor}>
         <option>--Select Color--</option>
