@@ -1,6 +1,0 @@
-.board-main {
-    background-color: rgb(202, 218, 171);
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: 200px;
-}
