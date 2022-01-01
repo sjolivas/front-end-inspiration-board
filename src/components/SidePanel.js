@@ -23,7 +23,7 @@ const makeEmptyCardFields = () => {
     };
 };
 
-const SidePanel = (props) => {
+const SidePanel = ({selectedBoard, handleAddCard}) => {
     //generate drop down menu of created boards
 
     const [currentBoards, setCurrentBoards] = useState([]);
@@ -70,7 +70,7 @@ const SidePanel = (props) => {
         event.preventDefault();
 
         axios
-            .post(`${process.env.REACT_APP_BACKEND_URL}/boards/${props.selectedBoard}/cards`, {
+            .post(`${process.env.REACT_APP_BACKEND_URL}/boards/${selectedBoard}/cards`, {
                 message: cardFields.message
             })
             .then ((response) => {
@@ -113,7 +113,7 @@ const SidePanel = (props) => {
 
     const onDeleteBoard = () => {
         axios
-        .delete(`${process.env.REACT_APP_BACKEND_URL}/boards/${props.selectedBoard}`)
+        .delete(`${process.env.REACT_APP_BACKEND_URL}/boards/${selectedBoard}`)
         .then((response) => {
             console.log(response);
             // ask Michelle to include board_id in success response message
@@ -127,9 +127,9 @@ const SidePanel = (props) => {
     return (
         <div className='sidepanel-main'>
             <SelectBoard/>
-            <button className="delete-board" onClick={onDeleteBoard}>Delete Selected Board</button>
+            {/* <button className="delete-board" onClick={onDeleteBoard}>Delete Selected Board</button> */}
             <CreateBoard/>
-            <CreateCard/>
+            <CreateCard handleAddCard={handleAddCard} />
             {/* <section className="board-selector">
                 <h3>Select Board to Display:</h3>
                 <select id='board-list' onChange={props.onSelectBoard}>

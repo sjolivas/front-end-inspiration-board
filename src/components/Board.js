@@ -1,9 +1,10 @@
 import React from "react";
 import Card from "./Card";
 import axios from "axios";
-import "./SidePanel"
+import CreateCard from "./CreateCard";
+import "./SidePanel";
 
-const Board = ({cards}) => {
+const Board = ({ cards }) => {
   //querying the db for all associated card ids with this particular board id
   // use axios.get and url from backend
   //filling in that info into card components
@@ -19,10 +20,7 @@ const Board = ({cards}) => {
     // displays Card array
     <div className="board-main">
       {cards.map((card) => (
-        <Card 
-          id={card.id} 
-          text={card.text} 
-        />
+        <Card id={card.id} text={card.text} />
       ))}
     </div>
   );

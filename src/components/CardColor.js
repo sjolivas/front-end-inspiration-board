@@ -1,14 +1,24 @@
-const CardColor = (props) => {
+import { useState } from "react";
+
+const CardColor = ({ onSelectColor }) => {
+  const [cardColor, setCardColor] = useState("#9bf6ff");
+
+  // constHandleColorChange = (event) => {
+  //   setCardColor();
+  // };
+
   return (
     <div className="card-color">
-      <label>Pick a Card Color:</label>
-      <select id="color-buttons" onChange={props.onSelectColor}>
-        <option>--Select Color--</option>
-        <option id="yellow">Yellow</option>
-        <option id="red">Red</option>
-        <option id="green">Green</option>
-        <option id="blue">Blue</option>
-      </select>
+      <h3>Pick A Card Color</h3>
+      <div id="color-buttons" onClick={onSelectColor}>
+        <button id="red">Red</button>
+        <button id="orange">Orange</button>
+        <button id="yellow">Yellow</button>
+        <button id="green">Green</button>
+        <button id="blue">Blue</button>
+        <button id="purple">Purple</button>
+        {/* <button id="#">Pink</button> */}
+      </div>
     </div>
   );
 };

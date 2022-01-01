@@ -37,6 +37,10 @@ function App() {
     },
   ]);
 
+  const addCard = (text) => {
+    console.log(text);
+  }
+
   // render Board with board id of selected board in dropdown menu
   return (
     <div className="App">
@@ -48,7 +52,7 @@ function App() {
         onSelectBoard={onSelectBoard}
         selectedBoard={selectedBoard}
       />
-      <Board className="board" cards={cards}/>
+      <Board className="board" cards={cards} handleAddCard={addCard}/>
     </div>
   );
 }

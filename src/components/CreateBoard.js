@@ -26,7 +26,13 @@ const CreateBoard = () => {
           // onChange={handleOwnerChanged}
         />
       </form>
-      <input className="submit-board" type="submit" value="Submit New Board" />
+      <form>
+        <input
+          className="submit-board"
+          type="submit"
+          value="Submit New Board"
+        />
+      </form>
     </section>
   );
 };
