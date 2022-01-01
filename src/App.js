@@ -13,27 +13,23 @@ function App() {
   const [cards, setCards] = useState([
     {
       id: 1,
-      text: "Inspiration!!!"
+      text: "Inspiration!!!",
+      color: "yellow"
     },
     {
-      id: 1,
-      text: "Inspiration!!!"
+      id: 2,
+      text: "Inspiration!!!",
+      color: "blue"
     },
     {
-      id: 1,
-      text: "Inspiration!!!"
+      id: 3,
+      text: "Inspiration!!!",
+      color: "green"
     },
     {
-      id: 1,
-      text: "Inspiration!!!"
-    },
-    {
-      id: 1,
-      text: "Inspiration!!!"
-    },
-    {
-      id: 1,
-      text: "Inspiration!!!"
+      id: 4,
+      text: "Inspiration!!!",
+      color: "purple"
     },
   ]);
 
