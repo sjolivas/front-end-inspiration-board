@@ -1,29 +1,3 @@
-Skip to content
-sjolivas
-/
-front-end-inspiration-board
-forked from Ada-C16/front-end-inspiration-board
-Code
-Pull requests
-Actions
-Wiki
-0
-More
-front-end-inspiration-board/src/index.css
-@sjolivas
-sjolivas experiment
- History
- 1 contributor
-264 lines (227 sloc)  4.65 KB
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',monospace;
 }
