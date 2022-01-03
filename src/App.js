@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Board from "./components/Board";
+import { nanoid } from "nanoid";
 import SidePanel from "./components/SidePanel";
 
 function App() {
@@ -10,32 +11,45 @@ function App() {
     setSelectedBoard(event.target.value);
   };
 
-  const [cards, setCards] = useState([
-    {
-      id: 1,
-      text: "Inspiration!!!",
-      color: "yellow"
-    },
-    {
-      id: 2,
-      text: "Inspiration!!!",
-      color: "blue"
-    },
-    {
-      id: 3,
-      text: "Inspiration!!!",
-      color: "green"
-    },
-    {
-      id: 4,
-      text: "Inspiration!!!",
-      color: "purple"
-    },
-  ]);
+  const [cards, setCards] = useState([]);
+  // const [boards, setBoards] = useState([]);
 
-  const addCard = (text) => {
-    console.log(text);
-  }
+  // useEffect(() => {
+
+  // },[])
+
+  // const addBoard = (cards, title, owner) => {
+  //   const newBoard = {
+  //     // id: add id
+  //     cards: cards,
+  //     title: title,
+  //     owner: owner,
+  //   }
+  //   const newBoards = [...boards, newBoard];
+  //   setBoards(newBoard);
+  // }
+
+  // const deleteBoard = (id) => {
+  //   const newBoards = boards.filter((board) => board.id !== id);
+  //   setBoards(newBoards);
+  // }
+
+  // will pass this funtion to CreateCard.js to update state and save a card.
+  const addCard = (text, likes) => {
+    // console.log(text);
+    const newCard = {
+      id: nanoid(),
+      text: text,
+      likes: likes,
+    };
+    const newCards = [...cards, newCard];
+    setCards(newCards);
+  };
+
+  const deleteCard = (id) => {
+    const newCards = cards.filter((card) => card.id !== id);
+    setCards(newCards);
+  };
 
   // render Board with board id of selected board in dropdown menu
   return (
@@ -45,10 +59,15 @@ function App() {
       </header>
       <SidePanel
         className="sidepanel"
-        onSelectBoard={onSelectBoard}
-        selectedBoard={selectedBoard}
+        // onSelectBoard={onSelectBoard}
+        // selectedBoard={selectedBoard}
       />
-      <Board className="board" cards={cards} handleAddCard={addCard}/>
+      <Board
+        className="board"
+        cards={cards}
+        handleAddCard={addCard}
+        handleDeleteCard={deleteCard}
+      />
     </div>
   );
 }

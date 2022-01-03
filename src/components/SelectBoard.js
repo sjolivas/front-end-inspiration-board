@@ -1,7 +1,9 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import CreateBoard from "./CreateBoard";
+// holds an array of boards
 
-const SelectBoard = () => {
+const SelectBoard = ({ boards, handleAddBoard, handleDeleteBoard }) => {
   return (
     <section className="board-selector">
       <h3>Select Board to Display</h3>
@@ -9,8 +11,9 @@ const SelectBoard = () => {
         <option disabled selected value>
           -- Select Board --
         </option>
+        {/* {boards.map} */}
       </select>
-      <button className="delete-board">Delete Selected Board</button>
+      <button className="display-board">Display Board</button>
     </section>
   );
 };

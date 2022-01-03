@@ -1,9 +1,7 @@
 import { useState } from "react";
 
 const CardColor = ({ onSelectColor }) => {
-  const [cardColor, setCardColor] = useState("#9bf6ff");
-
-  // constHandleColorChange = (event) => {
+  // const HandleColorChange = (event) => {
   //   setCardColor();
   // };
 
@@ -17,7 +15,6 @@ const CardColor = ({ onSelectColor }) => {
         <button id="green">Green</button>
         <button id="blue">Blue</button>
         <button id="purple">Purple</button>
-        {/* <button id="#">Pink</button> */}
       </div>
     </div>
   );
