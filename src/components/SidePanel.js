@@ -21,7 +21,7 @@ const makeEmptyCardFields = () => {
   };
 };
 
-const SidePanel = ({ selectedBoard, handleAddCard }) => {
+const SidePanel = ({ selectedBoard, handleAddCard, onSelectBoard }) => {
   //generate drop down menu of created boards
 
   const [currentBoards, setCurrentBoards] = useState([]);
@@ -127,7 +127,7 @@ const SidePanel = ({ selectedBoard, handleAddCard }) => {
 
   return (
     <div className="sidepanel-main">
-      <SelectBoard setCurrentBoards={setCurrentBoards} />
+      <SelectBoard onSelectBoard={onSelectBoard} setCurrentBoards={setCurrentBoards} />
       <CreateBoard />
       <CreateCard handleAddCard={handleAddCard} />
       <button className="delete-board">Delete Selected Board</button>

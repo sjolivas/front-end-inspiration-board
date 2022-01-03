@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const SelectBoard = ({ setCurrentBoards }) => {
+const SelectBoard = ({ setCurrentBoards, onSelectBoard }) => {
+
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_BACKEND_URL}/boards`)
@@ -32,7 +33,7 @@ const SelectBoard = ({ setCurrentBoards }) => {
           -- Select Board --
         </option>
       </select>
-      <button className="display-board">Display Selected Board</button>
+      <button className="display-board" onClick={onSelectBoard}>Display Selected Board</button>
     </section>
   );
 };

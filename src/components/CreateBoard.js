@@ -10,6 +10,7 @@ const makeEmptyBoardFields = () => {
 
 const CreateBoard = () => {
   const [boardFields, setBoardFields] = useState(makeEmptyBoardFields());
+  const [errorMessage, setErrorMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [valid, setValid] = useState(false);
 
@@ -19,19 +20,21 @@ const CreateBoard = () => {
       <div className="success-message">Success! You made a new board</div>
     ) : null;
 
-  const titleValidation =
-    submitted && !boardFields.title ? (
-      <span className="error">Please Enter Title</span>
-    ) : null;
+  // const titleValidation =
+  //   submitted && !boardFields.title ? (
+  //     <span className="error">Please Enter Title</span>
+  //   ) : null;
 
-  const ownerValidation =
-    submitted && !boardFields.owner ? (
-      <span className="error">Please Enter Name</span>
-    ) : null;
+  // const ownerValidation =
+  //   submitted && !boardFields.owner ? (
+  //     <span className="error">Please Enter Name</span>
+  //   ) : null;
+
+
 
   const onSubmitBoard = (event) => {
-    console.log("in submit board");
     event.preventDefault();
+    console.log("in submit board");
 
     axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/boards`, {
@@ -39,13 +42,16 @@ const CreateBoard = () => {
         owner: boardFields.owner, //find a way to use form field info here
       })
       .then((response) => {
+        // setValid(true);
+        // setSubmitted(true);
         setBoardFields(makeEmptyBoardFields());
-        setValid(true);
-        setSubmitted(true);
         console.log(response);
       })
-      .catch((error) => console.log(error));
-  };
+      .catch((error) => {
+        console.log(error.response.data.details);
+        setErrorMessage(error.response.data.details);
+      }
+      )};
 
   // add error logic for going over 40 characters in card's message
 
@@ -74,27 +80,27 @@ const CreateBoard = () => {
     <section className="create-new-board">
       <h3>Create New Board</h3>
       <form className="BoardForm" onSubmit={onSubmitBoard}>
-        {submitBool}
+        {/* {submitBool} */}
+        {errorMessage}
         <input
           id="board-title-input"
           name="title"
           type="text"
           maxLength="25"
           placeholder="Board Title"
-          // value ={boardFields.title}
-          // onChange={handleTitleChanged}
+          value ={boardFields.title}
+          onChange={handleTitleChanged}
         />
-        {titleValidation}
         <input
           id="owner-name-input"
           name="owner"
           type="text"
           maxLength="30"
           placeholder="Owner's Name"
-          // value={boardFields.owner}
-          // onChange={handleOwnerChanged}
+          value={boardFields.owner}
+          onChange={handleOwnerChanged}
         />
-        {ownerValidation}
+        {/* {ownerValidation} */}
         <button className="submit-board" type="submit" value="Submit New Board">
           Submit
         </button>
