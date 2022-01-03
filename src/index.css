@@ -1,3 +1,20 @@
+Skip to content
+sjolivas
+/
+front-end-inspiration-board
+forked from Ada-C16/front-end-inspiration-board
+Code
+Pull requests
+Actions
+Wiki
+0
+More
+front-end-inspiration-board/src/index.css
+@sjolivas
+sjolivas experiment
+ History
+ 1 contributor
+264 lines (227 sloc)  4.65 KB
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -21,7 +38,7 @@ body {
   display: grid; 
   grid-auto-columns: 1fr; 
   grid-template-columns: 25% 31.5fr 21.5fr 22fr;  
-  grid-template-rows: 10% 90%; 
+  grid-template-rows: 20% 80%; 
   gap: 20px; 
   grid-template-areas: 
     "App-header App-header App-header App-header"
@@ -31,17 +48,17 @@ body {
 
 .App-header { 
   grid-area: App-header;
-  display: grid;
-  justify-items: center;
-  align-items: center;
+  display: block;
+  text-align: center;
+  line-height: 10px;
 	font-size: 25px;
-	margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 
 .sidepanel { 
   grid-area: sidepanel;
   min-height: 250px;
-  width: 200px
+  width: 200px;
 }
 
 .board { grid-area: board; }
@@ -58,7 +75,6 @@ body {
 }
 
 .board-main {
-  /* background-color: #F1DCA7; */
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(250px, .5fr));
@@ -72,13 +88,21 @@ body {
 }
 
 .card-main {
-  background-color: #fffcab; ;
+  background-color: #fffcab;
+  overflow-wrap: break-word;
   border-radius: 10px;
-  padding: 1rem;
-  min-height: 170px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+	padding: 1rem;
+	min-height: 170px;
+  max-height: 220px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	white-space: pre-wrap;
+}
+
+/* Creating New Card */
+.card-main.create-card { 
+  background-color: #d8f3dc;
 }
 
 .card-footer {
@@ -92,30 +116,49 @@ body {
   grid-area: board-selector;
   display: grid;
   grid-gap: 10px;
-  /* display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 10px;
-  padding-left: 10px;
-  padding-right: 10px; */
 }
 
+/* Create New Board */
 .create-new-board { 
   grid-area: create-new-board;
-  display: grid;
-  grid-gap: 10px;
+  text-align: center;
+  width: 250px;
+  background-color: white;
+  margin: auto;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  padding: 10px;
 }
 
-/* Creating New Card */
-.create-card { 
-  border-radius: 10px;
+.BoardForm {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding-bottom: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 10px;
+  justify-content: space-evenly;
+  padding: 10px;
+}
+
+span.error {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  color: red;
+  margin-bottom: 15px;
+}
+
+.success-message {
+  font-family: "Roboto", sans-serif;
+  background-color: #3f89f8;
+  padding: 15px;
+  color: white;
+}
+
+.error {
+  border-style: solid;
+  border: 2px solid #ffa4a4;
+}
+
+/* inputs */
+input {
+  border-radius: 5px;
+  border: #006d77 solid;
 }
 
 /* Card Colors */
@@ -130,40 +173,47 @@ body {
 }
 
 /* Card Color Options - displayed on buttons */
-button#red {
+button#red, .color-change-red{
   background-color: #ffadad;
 }
 
-button#orange {
+button#orange, .color-change-orange{
   background-color: #ffd6a5;
 }
 
-button#yellow {
+button#yellow, .color-change-yellow{
   background-color: #fdffb6;
 }
 
-button#green {
-  background-color: #caffbf;
+button#green, .color-change-green{
+  background-color: #d8f3dc;
 }
 
-button#blue {
-  background-color: #9bf6ff;
+button#blue, .color-change-blue{
+  background-color: #caf0f8;
 }
 
-button#purple {
-  background-color: #bdb2ff;
+button#purple, .color-change-purple {
+  background-color: #dee2ff;
 }
 
 /* Text Area for CreateCard */
 textarea {
-  background-color: #fffcab;
+  background-color: #d8f3dc;
+  color: #006d77;
+  font-weight: bold;
   border: none;
   resize: none;
-  border-radius: 10px;
   overflow: auto;
-  padding: 1rem;
-  min-height: 150px;
-  width: 170px;
+  border-radius: 10px;
+	padding: 1rem;
+	min-height: 170px;
+  max-height: 220px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	white-space: pre-wrap;
+  
 }
 
 textarea:focus {
@@ -204,22 +254,10 @@ button:hover {
   font: Helvetica;
 }
 
-/* Submit Board Button (input) */
-.submit-board {
-  color: #006d77;
-  border: #006d77 solid;
-	padding: 5px 10px;
-	border-radius: 50px;
-	background: #fff;
-	margin-bottom: 10px;
-	box-shadow: 0 3px 20px 0 #0000003b;
-}
-
-.submit-board:hover {
-  background-color: #7B2CBF;
+.delete-icon {
   cursor: pointer;
-  color: white;
-  font: Helvetica;
 }
 
-
+.like-icon {
+  cursor: pointer;
+}

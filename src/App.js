@@ -10,32 +10,11 @@ function App() {
     setSelectedBoard(event.target.value);
   };
 
-  const [cards, setCards] = useState([
-    {
-      id: 1,
-      text: "Inspiration!!!",
-      color: "yellow"
-    },
-    {
-      id: 2,
-      text: "Inspiration!!!",
-      color: "blue"
-    },
-    {
-      id: 3,
-      text: "Inspiration!!!",
-      color: "green"
-    },
-    {
-      id: 4,
-      text: "Inspiration!!!",
-      color: "purple"
-    },
-  ]);
+  const [cards, setCards] = useState([]);
 
   const addCard = (text) => {
     console.log(text);
-  }
+  };
 
   // render Board with board id of selected board in dropdown menu
   return (
@@ -48,7 +27,7 @@ function App() {
         onSelectBoard={onSelectBoard}
         selectedBoard={selectedBoard}
       />
-      <Board className="board" cards={cards} handleAddCard={addCard}/>
+      <Board className="board" cards={cards} handleAddCard={addCard} />
     </div>
   );
 }
