@@ -10,7 +10,7 @@ const makeEmptyBoardFields = () => {
 
 const CreateBoard = () => {
   const [boardFields, setBoardFields] = useState(makeEmptyBoardFields());
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [valid, setValid] = useState(false);
 
@@ -30,8 +30,6 @@ const CreateBoard = () => {
   //     <span className="error">Please Enter Name</span>
   //   ) : null;
 
-
-
   const onSubmitBoard = (event) => {
     event.preventDefault();
     console.log("in submit board");
@@ -44,14 +42,21 @@ const CreateBoard = () => {
       .then((response) => {
         // setValid(true);
         // setSubmitted(true);
+        const boardList = document.getElementById("board-list");
+        const newBoard = document.createElement("option");
+        newBoard.value = response.data.board.board_id;
+        newBoard.id = response.data.board.board_id;
+        const boardTitle = document.createTextNode(response.data.board.title);
+        newBoard.appendChild(boardTitle);
+        boardList.appendChild(newBoard);
         setBoardFields(makeEmptyBoardFields());
-        console.log(response);
+        // console.log(response.data.board.title);
       })
       .catch((error) => {
         console.log(error.response.data.details);
         setErrorMessage(error.response.data.details);
-      }
-      )};
+      });
+  };
 
   // add error logic for going over 40 characters in card's message
 
@@ -88,7 +93,7 @@ const CreateBoard = () => {
           type="text"
           maxLength="25"
           placeholder="Board Title"
-          value ={boardFields.title}
+          value={boardFields.title}
           onChange={handleTitleChanged}
         />
         <input

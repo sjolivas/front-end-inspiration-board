@@ -1,8 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const SelectBoard = ({ setCurrentBoards, onSelectBoard }) => {
-
+const SelectBoard = ({ onSelectBoard, setCurrentBoards }) => {
   const onDisplayBoard = () => {};
 
   useEffect(() => {
@@ -30,14 +29,14 @@ const SelectBoard = ({ setCurrentBoards, onSelectBoard }) => {
   return (
     <section className="board-selector">
       <h3>Select Board to Display</h3>
-      <select 
-      id="board-list"
-      onChange={onSelectBoard}>
+      <select id="board-list" onChange={onSelectBoard}>
         <option disabled selected value>
           -- Select Board --
         </option>
       </select>
-      <button className="display-board" onClick={onDisplayBoard}>Display Selected Board</button>
+      <button className="display-board" onClick={onDisplayBoard}>
+        Display Selected Board
+      </button>
     </section>
   );
 };
