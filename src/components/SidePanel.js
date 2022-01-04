@@ -116,11 +116,12 @@ const SidePanel = ({ selectedBoard, handleAddCard, onSelectBoard }) => {
     axios
       .delete(`${process.env.REACT_APP_BACKEND_URL}/boards/${selectedBoard}`)
       .then((response) => {
-        console.log(response);
+        console.log('response',response);
         // ask Michelle to include board_id in success response message
-        // const boardId = response.data.board_id
-        // const deletedBoard = document.getElementById(boardId);
-        // deletedBoard.remove();
+        const boardId = selectedBoard;
+        console.log('selectedBoard',selectedBoard);
+        const deletedBoard = document.getElementById(boardId);
+        deletedBoard.remove();
       })
       .catch((error) => console.log(error));
   };
@@ -130,7 +131,7 @@ const SidePanel = ({ selectedBoard, handleAddCard, onSelectBoard }) => {
       <SelectBoard onSelectBoard={onSelectBoard} setCurrentBoards={setCurrentBoards} />
       <CreateBoard />
       <CreateCard handleAddCard={handleAddCard} />
-      <button className="delete-board">Delete Selected Board</button>
+      <button className="delete-board" onClick={onDeleteBoard}>Delete Selected Board</button>
     </div>
   );
 };

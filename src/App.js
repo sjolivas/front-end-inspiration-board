@@ -8,9 +8,7 @@ function App() {
   const [selectedBoard, setSelectedBoard] = useState(null);
   
   const onSelectBoard = (event) => {
-    const selectedBoardId = document.getElementById('board-list').value;
-    setSelectedBoard(selectedBoardId);
-    console.log('board-list value',selectedBoardId);
+    setSelectedBoard(event.target.value);
   };
 
   const [cards, setCards] = useState([]);
