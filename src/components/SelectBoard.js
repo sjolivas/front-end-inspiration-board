@@ -1,9 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const SelectBoard = ({ onSelectBoard, setCurrentBoards }) => {
-  const onDisplayBoard = () => {};
-
+const SelectBoard = ({ onSelectBoard, setCurrentBoards, onDisplayBoard }) => {
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_BACKEND_URL}/boards`)

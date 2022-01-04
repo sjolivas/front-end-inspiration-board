@@ -1,7 +1,12 @@
 import CardColor from "./CardColor";
 import { useState } from "react";
+import axios from "axios";
 
-const CreateCard = ({ handleAddCard }) => {
+const makeEmptyCardText = () => {
+  return "";
+};
+
+const CreateCard = ({ handleAddCard, selectedBoard }) => {
   const [cardText, setCardText] = useState("");
 
   const handleTextChange = (event) => {
@@ -10,7 +15,22 @@ const CreateCard = ({ handleAddCard }) => {
   };
 
   const handleSaveClick = () => {
-    handleAddCard(cardText);
+    axios
+      .post(
+        `${process.env.REACT_APP_BACKEND_URL}/boards/${selectedBoard}/cards`,
+        {
+          message: cardText, //find a way to use form field info here
+        }
+      )
+      .then((response) => {
+        setCardText(makeEmptyCardText());
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error.response.data.details);
+        // setErrorMessage(error.response.data.details);
+      });
+    // handleAddCard(cardText);
   };
 
   return (
