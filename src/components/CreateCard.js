@@ -41,7 +41,7 @@ const CreateCard = ({ handleAddCard, selectedBoard }) => {
         value={cardText}
         onChange={handleTextChange}
       ></textarea>
-      <CardColor />
+      {/* <CardColor /> */}
       <div className="card-footer">
         <button className="save-card" onClick={handleSaveClick}>
           Save
