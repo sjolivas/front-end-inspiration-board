@@ -22,6 +22,18 @@ function App() {
       .get(`${process.env.REACT_APP_BACKEND_URL}/boards/${selectedBoard}/cards`)
       .then((response) => {
         console.log(response);
+        const responseCards = response.data.cards;
+        let cardsList = [];
+        for (let card of responseCards) {
+          let newCard = {};
+          newCard.boardId = card.board_id;
+          newCard.cardId = card.card_id;
+          newCard.message = card.message;
+          newCard.likesCount = card.likes_count;
+          cardsList.push(newCard);
+        };
+        console.log(cardsList);
+        setCards(cardsList);
       })
       .catch((error) => console.log(error));
   };

@@ -4,7 +4,7 @@ import axios from "axios";
 import CreateCard from "./CreateCard";
 import "./SidePanel";
 
-const Board = ({ selectedBoard }) => {
+const Board = ({ selectedBoard, cards }) => {
   //querying the db for all associated card ids with this particular board id
   // use axios.get and url from backend
   //filling in that info into card components
@@ -22,15 +22,17 @@ const Board = ({ selectedBoard }) => {
   // patch
   // get
   // delete
+  let cardsList = [];
+  for (let card of cards) {
+    cardsList.push(<Card cardId={card.cardId} message={card.message} likesCount={card.likesCount}/>);
+  };
 
   return (
     // get associated cards from database
     // render card components for each db record
     // displays Card array
     <div className="board-main">
-      {/* {cards.map((card) => (
-        <Card id={card.id} text={card.text} />
-      ))} */}
+      {cardsList}
     </div>
   );
 };
