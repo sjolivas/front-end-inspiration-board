@@ -31,7 +31,7 @@ function App() {
           newCard.message = card.message;
           newCard.likesCount = card.likes_count;
           cardsList.push(newCard);
-        };
+        }
         console.log(cardsList);
         setCards(cardsList);
       })
@@ -52,6 +52,7 @@ function App() {
       />
       <Board
         className="board"
+        setCards={setCards}
         cards={cards}
         handleAddCard={addCard}
         selectedBoard={selectedBoard}
