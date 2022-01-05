@@ -22,6 +22,7 @@ const Board = ({ selectedBoard, cards }) => {
   // patch
   // get
   // delete
+
   let cardsList = [];
   for (let card of cards) {
     cardsList.push(<Card cardId={card.cardId} message={card.message} likesCount={card.likesCount}/>);
