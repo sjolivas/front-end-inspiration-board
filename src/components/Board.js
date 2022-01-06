@@ -6,6 +6,7 @@ const Board = ({ cards, setCards }) => {
   const cardsList = cards.map((card) => {
     return (
       <Card
+        key={card.cardId}
         cardId={card.cardId}
         message={card.message}
         likesCount={card.likesCount}
