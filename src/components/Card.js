@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import "./SidePanel";
-import { MdDeleteForever } from "react-icons/md";
+import { MdAllInbox, MdDeleteForever } from "react-icons/md";
 import { FcLike } from "react-icons/fc";
 
 const Card = ({ cards, cardId, message, likesCount, setCards }) => {
@@ -12,10 +12,7 @@ const Card = ({ cards, cardId, message, likesCount, setCards }) => {
   // patch
   // get
   // delete
-  console.log(cardId);
   const onCardLike = (event) => {
-    // console.log(event.target.parentNode);
-
     axios
       .patch(`${process.env.REACT_APP_BACKEND_URL}/cards/${cardId}`)
       .then((response) => {
@@ -27,24 +24,20 @@ const Card = ({ cards, cardId, message, likesCount, setCards }) => {
   };
 
   const onCardDelete = (event) => {
-    //having trouble selecting card id from target event
-    // console.log(event.currentTarget.value);
-    // console.log('delete', cardId);
+    console.log(cardId);
     axios
       .delete(`${process.env.REACT_APP_BACKEND_URL}/cards/${cardId}`)
       .then((response) => {
-        console.log("response", response);
-        // ask Michelle to include board_id in success response message
-        // const boardId = selectedBoard;
-        // console.log("selectedBoard", selectedBoard);
-        // const deletedBoard = document.getElementById(boardId);
-        // deletedBoard.remove();
+        console.log(response);
+        const deletedCard = document.querySelector(`[name='Card${cardId}']`)
+        console.log(deletedCard);
+        deletedCard.remove();
       })
       .catch((error) => console.log(error));
   };
 
   return (
-    <div className="card-main" id={cardId}>
+    <div className="card-main" id={cardId} name={`Card${cardId}`}>
       <span className="card-text">{message}</span>
 
       <div className="card-footer">
@@ -53,10 +46,9 @@ const Card = ({ cards, cardId, message, likesCount, setCards }) => {
           size="1.3em"
           onClick={() => onCardLike()}
         />
-        <small id={`likesDisplay${cardId}`}>likes: {likes}</small>
+        <small id={`likesDisplay${cardId}`}>Likes: {likes}</small>
         <MdDeleteForever
           className="delete-icon"
-          value={cardId}
           size="1.3em"
           onClick={() => onCardDelete()}
         />
