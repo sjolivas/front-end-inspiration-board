@@ -11,14 +11,10 @@ const makeEmptyBoardFields = () => {
 const CreateBoard = () => {
   const [boardFields, setBoardFields] = useState(makeEmptyBoardFields());
   const [errorMessage, setErrorMessage] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const [valid, setValid] = useState(false);
+  // const [submitted, setSubmitted] = useState(false);
+  // const [valid, setValid] = useState(false);
 
   // Submit Validations and Handler
-  const submitBool =
-    submitted && valid ? (
-      <div className="success-message">Success! You made a new board</div>
-    ) : null;
 
   // const titleValidation =
   //   submitted && !boardFields.title ? (
@@ -50,6 +46,7 @@ const CreateBoard = () => {
         newBoard.appendChild(boardTitle);
         boardList.appendChild(newBoard);
         setBoardFields(makeEmptyBoardFields());
+        setErrorMessage("");
         // console.log(response.data.board.title);
       })
       .catch((error) => {
@@ -85,7 +82,6 @@ const CreateBoard = () => {
     <section className="create-new-board">
       <h3>Create New Board</h3>
       <form className="BoardForm" onSubmit={onSubmitBoard}>
-        {/* {submitBool} */}
         {errorMessage}
         <input
           id="board-title-input"

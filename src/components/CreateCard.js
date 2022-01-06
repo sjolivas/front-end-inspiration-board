@@ -6,11 +6,10 @@ const makeEmptyCardText = () => {
   return "";
 };
 
-const CreateCard = ({ handleAddCard, selectedBoard }) => {
+const CreateCard = ({ selectedBoard, onDisplayBoard }) => {
   const [cardText, setCardText] = useState("");
 
   const handleTextChange = (event) => {
-    // console.log(event.target.value);
     setCardText(event.target.value);
   };
 
@@ -19,18 +18,17 @@ const CreateCard = ({ handleAddCard, selectedBoard }) => {
       .post(
         `${process.env.REACT_APP_BACKEND_URL}/boards/${selectedBoard}/cards`,
         {
-          message: cardText, //find a way to use form field info here
+          message: cardText,
         }
       )
       .then((response) => {
         setCardText(makeEmptyCardText());
+        onDisplayBoard();
         console.log(response);
       })
       .catch((error) => {
         console.log(error.response.data.details);
-        // setErrorMessage(error.response.data.details);
       });
-    // handleAddCard(cardText);
   };
 
   return (

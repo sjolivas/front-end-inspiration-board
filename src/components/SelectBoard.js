@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 const SelectBoard = ({ onSelectBoard, setCurrentBoards, onDisplayBoard }) => {
   useEffect(() => {
@@ -28,9 +28,7 @@ const SelectBoard = ({ onSelectBoard, setCurrentBoards, onDisplayBoard }) => {
     <section className="board-selector">
       <h3>Select Board to Display</h3>
       <select id="board-list" onChange={onSelectBoard}>
-        <option disabled selected value>
-          -- Select Board --
-        </option>
+        <option>-- Select Board --</option>
       </select>
       <button className="display-board" onClick={onDisplayBoard}>
         Display Selected Board

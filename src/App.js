@@ -4,17 +4,11 @@ import SidePanel from "./components/SidePanel";
 import axios from "axios";
 
 function App() {
-  //saves the current selected board from side panel's id as a piece of state
   const [selectedBoard, setSelectedBoard] = useState(null);
+  const [cards, setCards] = useState([]);
 
   const onSelectBoard = (event) => {
     setSelectedBoard(event.target.value);
-  };
-
-  const [cards, setCards] = useState([]);
-
-  const addCard = (text) => {
-    console.log(text);
   };
 
   const onDisplayBoard = () => {
@@ -38,7 +32,6 @@ function App() {
       .catch((error) => console.log(error));
   };
 
-  // render Board with board id of selected board in dropdown menu
   return (
     <div className="App">
       <header className="App-header">
@@ -54,7 +47,6 @@ function App() {
         className="board"
         setCards={setCards}
         cards={cards}
-        handleAddCard={addCard}
         selectedBoard={selectedBoard}
       />
     </div>

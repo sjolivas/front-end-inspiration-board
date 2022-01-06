@@ -1,22 +1,17 @@
 import axios from "axios";
 import React, { useState } from "react";
 import "./SidePanel";
-import { MdAllInbox, MdDeleteForever } from "react-icons/md";
+import { MdDeleteForever } from "react-icons/md";
 import { FcLike } from "react-icons/fc";
 
-const Card = ({ cards, cardId, message, likesCount, setCards }) => {
-  // const state = { likes: likesCount };
+const Card = ({ cardId, message, likesCount }) => {
   let [likes, setLikes] = useState(likesCount);
 
-  // API calls for likes
-  // patch
-  // get
-  // delete
   const onCardLike = (event) => {
     axios
       .patch(`${process.env.REACT_APP_BACKEND_URL}/cards/${cardId}`)
       .then((response) => {
-        likes += 1;
+        setLikes((likes += 1));
         const likesNumber = document.querySelector(`#likesDisplay${cardId}`);
         likesNumber.textContent = `Likes:${likes}`;
       })
@@ -29,7 +24,7 @@ const Card = ({ cards, cardId, message, likesCount, setCards }) => {
       .delete(`${process.env.REACT_APP_BACKEND_URL}/cards/${cardId}`)
       .then((response) => {
         console.log(response);
-        const deletedCard = document.querySelector(`[name='Card${cardId}']`)
+        const deletedCard = document.querySelector(`[name='Card${cardId}']`);
         console.log(deletedCard);
         deletedCard.remove();
       })
