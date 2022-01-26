@@ -1,19 +1,16 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React from "react";
 import "./SidePanel";
 import { MdDeleteForever } from "react-icons/md";
 import { FcLike } from "react-icons/fc";
 
-const Card = ({ cardId, message, likesCount }) => {
-  let [likes, setLikes] = useState(likesCount);
+const Card = ({ cardId, message, likesCount, onUpdate }) => {
 
   const onCardLike = (event) => {
     axios
       .patch(`${process.env.REACT_APP_BACKEND_URL}/cards/${cardId}`)
       .then((response) => {
-        setLikes((likes += 1));
-        const likesNumber = document.querySelector(`#likesDisplay${cardId}`);
-        likesNumber.textContent = `Likes:${likes}`;
+        onUpdate()
       })
       .catch((error) => console.log(error));
   };
@@ -23,16 +20,13 @@ const Card = ({ cardId, message, likesCount }) => {
     axios
       .delete(`${process.env.REACT_APP_BACKEND_URL}/cards/${cardId}`)
       .then((response) => {
-        console.log(response);
-        const deletedCard = document.querySelector(`[name='Card${cardId}']`);
-        console.log(deletedCard);
-        deletedCard.remove();
+        onUpdate()
       })
       .catch((error) => console.log(error));
   };
 
   return (
-    <div className="card-main" id={cardId} name={`Card${cardId}`}>
+    <div className="card-main">
       <span className="card-text">{message}</span>
 
       <div className="card-footer">
@@ -41,7 +35,7 @@ const Card = ({ cardId, message, likesCount }) => {
           size="1.3em"
           onClick={() => onCardLike()}
         />
-        <small id={`likesDisplay${cardId}`}>Likes: {likes}</small>
+        <small>Likes: {likesCount}</small>
         <MdDeleteForever
           className="delete-icon"
           size="1.3em"

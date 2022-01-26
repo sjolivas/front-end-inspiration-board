@@ -8,7 +8,7 @@ const makeEmptyBoardFields = () => {
   };
 };
 
-const CreateBoard = () => {
+const CreateBoard = ({onCreateBoard}) => {
   const [boardFields, setBoardFields] = useState(makeEmptyBoardFields());
   const [errorMessage, setErrorMessage] = useState("");
   // const [submitted, setSubmitted] = useState(false);
@@ -38,13 +38,7 @@ const CreateBoard = () => {
       .then((response) => {
         // setValid(true);
         // setSubmitted(true);
-        const boardList = document.getElementById("board-list");
-        const newBoard = document.createElement("option");
-        newBoard.value = response.data.board.board_id;
-        newBoard.id = response.data.board.board_id;
-        const boardTitle = document.createTextNode(response.data.board.title);
-        newBoard.appendChild(boardTitle);
-        boardList.appendChild(newBoard);
+        onCreateBoard();
         setBoardFields(makeEmptyBoardFields());
         setErrorMessage("");
         // console.log(response.data.board.title);

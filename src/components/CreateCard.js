@@ -14,6 +14,8 @@ const CreateCard = ({ selectedBoard, onDisplayBoard }) => {
   };
 
   const handleSaveClick = () => {
+    if (selectedBoard < 0) { return; }
+
     axios
       .post(
         `${process.env.REACT_APP_BACKEND_URL}/boards/${selectedBoard}/cards`,

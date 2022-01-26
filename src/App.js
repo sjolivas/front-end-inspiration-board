@@ -4,16 +4,31 @@ import SidePanel from "./components/SidePanel";
 import axios from "axios";
 
 function App() {
-  const [selectedBoard, setSelectedBoard] = useState(null);
+  const [selectedBoard, setSelectedBoard] = useState(-1);
   const [cards, setCards] = useState([]);
 
-  const onSelectBoard = (event) => {
-    setSelectedBoard(event.target.value);
+  const onSelectBoard = (id) => {
+    setSelectedBoard(id);
+
+    if (id < 0) {
+      refreshCards(id);
+    }
   };
 
   const onDisplayBoard = () => {
+    refreshCards();
+  };
+
+  const refreshCards = (overrideId) => {
+    const boardId = overrideId || selectedBoard;
+
+    if (boardId < 0) {
+      setCards([]);
+      return;
+    }
+
     axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}/boards/${selectedBoard}/cards`)
+      .get(`${process.env.REACT_APP_BACKEND_URL}/boards/${boardId}/cards`)
       .then((response) => {
         console.log(response);
         const responseCards = response.data.cards;
@@ -45,7 +60,7 @@ function App() {
       />
       <Board
         className="board"
-        setCards={setCards}
+        onUpdateCards={refreshCards}
         cards={cards}
         selectedBoard={selectedBoard}
       />
