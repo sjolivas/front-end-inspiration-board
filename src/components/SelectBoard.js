@@ -1,34 +1,21 @@
-import axios from "axios";
-import { useEffect } from "react";
+const SelectBoard = ({ onSelectBoard, selectedBoard, boardList, onDisplayBoard }) => {
 
-const SelectBoard = ({ onSelectBoard, setCurrentBoards, onDisplayBoard }) => {
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}/boards`)
-      .then((response) => {
-        const boards = response.data[0];
-        setCurrentBoards((prevState) => {
-          prevState = boards;
-        });
-        const boardList = document.getElementById("board-list");
+  const boardValue = selectedBoard || "";
+  console.log(boardValue);
 
-        for (let board of boards) {
-          let newBoard = document.createElement("option");
-          newBoard.value = board.board_id;
-          newBoard.id = board.board_id;
-          const boardTitle = document.createTextNode(board.title);
-          newBoard.appendChild(boardTitle);
-          boardList.appendChild(newBoard);
-        }
-      })
-      .catch((error) => console.log(error));
-  }, []);
+  const onSelectChange = (event) => {
+    const id = parseInt(event.target.value);
+    onSelectBoard(id);
+  };
 
   return (
     <section className="board-selector">
       <h3>Select Board to Display</h3>
-      <select id="board-list" onChange={onSelectBoard}>
-        <option>-- Select Board --</option>
+      <select id="board-list" onChange={onSelectChange} value={boardValue}>
+        <option value={-1}>-- Select Board --</option>
+        { boardList.map(board => (
+          <option key={board.board_id} value={board.board_id}>{board.title}</option>
+        )) }
       </select>
       <button className="display-board" onClick={onDisplayBoard}>
         Display Selected Board

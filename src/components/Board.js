@@ -2,7 +2,7 @@ import React from "react";
 import Card from "./Card";
 import "./SidePanel";
 
-const Board = ({ cards, setCards }) => {
+const Board = ({ cards, onUpdateCards }) => {
   const cardsList = cards.map((card) => {
     return (
       <Card
@@ -10,8 +10,7 @@ const Board = ({ cards, setCards }) => {
         cardId={card.cardId}
         message={card.message}
         likesCount={card.likesCount}
-        setCards={setCards}
-        cards={cards}
+        onUpdate={onUpdateCards}
       />
     );
   });
